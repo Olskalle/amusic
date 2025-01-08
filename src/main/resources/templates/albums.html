@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/layout.html}">
+
+<head>
+    <title>Альбомы</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        a {
+            text-decoration: none;
+        }
+
+        .artist-block {
+            margin-bottom: 40px;
+        }
+
+        .artist-name {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .albums-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: start;
+        }
+
+        .album-card {
+            width: 150px;
+            height: 200px;
+            background-color: #1c1c1c;
+            border-radius: 8px;
+            text-align: center;
+            padding: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .album-card:hover {
+            background-color: #2a2a2a;
+        }
+
+        .album-placeholder {
+            width: 80px;
+            height: 80px;
+            background-color: #444;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+        }
+
+        .album-title {
+            color: #fff;
+            font-size: 1em;
+            margin-bottom: 5px;
+        }
+
+        .album-year {
+            color: #aaa;
+            font-size: 0.9em;
+        }
+
+        .add-card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #bbb;
+            font-size: 2em;
+        }
+
+        .add-card:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <div layout:decorator="layout.html">
+        <div layout:fragment="content">
+            <div class="content">
+                <!-- Artist Block -->
+                <div th:each="artist : ${info}">
+                    <div class="artist-block">
+                        <div class="artist-name" th:text="${artist.artist.name}">Имя исполнителя</div>
+                        <div class="albums-list">
+                            <div th:each="album : ${artist.albums}">
+
+                                <!-- Album Card -->
+                                <a th:href="@{/albums/edit(id=${album.id})}">
+                                    <div class="album-card">
+                                        <div class="album-placeholder"></div>
+                                        <div class="album-title" th:text="${album.title}">Название альбома</div>
+                                        <div class="album-year" th:text="${album.releaseYear}">Год выпуска</div>
+                                    </div>
+                                </a>                                
+                            </div>
+                            <!-- Add Album Card -->
+                            <a th:href="@{/albums/add}">
+                                <div class="album-card add-card" >
+                                    +
+                                </div>
+                            </a>                                
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
