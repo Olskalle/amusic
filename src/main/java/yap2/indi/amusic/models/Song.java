@@ -58,11 +58,6 @@ public class Song implements HasId {
         this.album = album;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "genre_id")
-    private Genre genre;
-
-    // Getters and Setters
     public Long getId() {
         return id;
     }

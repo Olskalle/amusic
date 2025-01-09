@@ -69,4 +69,16 @@ public class Album implements HasId {
     public void setArtist(Artist artist) {
         this.artist = artist;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "genre_id", nullable = false)
+    private Genre genre;
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
 }

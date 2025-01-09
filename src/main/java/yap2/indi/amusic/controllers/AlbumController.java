@@ -53,6 +53,7 @@ public class AlbumController {
 
     @PostMapping("/albums/edit")
     public String editAlbum(@RequestParam Long id, @ModelAttribute Album album) {
+        album.setGenre(album.getArtist().getGenre());
         albumsService.update(album);
         return "redirect:/albums";
     }
@@ -67,10 +68,11 @@ public class AlbumController {
 
     @PostMapping("/albums/add")
     public String addAlbum(@ModelAttribute Album album) {
+        album.setGenre(album.getArtist().getGenre());
         albumsService.save(album);
         return "redirect:/albums";
     }
-
+    
     @PostMapping("/albums/delete")
     public String deleteAlbum(@RequestParam Long id) {
         albumsService.delete(id);

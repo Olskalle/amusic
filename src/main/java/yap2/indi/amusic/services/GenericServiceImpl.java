@@ -44,4 +44,9 @@ public class GenericServiceImpl<T extends HasId> implements GenericService<T, Lo
     public void delete(Long id) {
         repository.deleteById(id);
     }
+
+    @Override
+    public void saveAll(List<T> items) {
+        repository.saveAll(items);
+    }
 }

@@ -14,4 +14,5 @@ public interface GenericService<T extends HasId, Id> {
     T save(T entity);
     T update(T entity);
     void delete(Id id);
+    void saveAll(List<T> items);
 } 

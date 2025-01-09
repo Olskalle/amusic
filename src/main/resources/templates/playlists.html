@@ -3,11 +3,11 @@
     layout:decorate="~{layouts/layout.html}">
 
 <head>
-    <title>Песни</title>
+    <title>Плейлисты</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <style>
         /* Стили для песен */
-        .song-item {
+        .playlist-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -17,15 +17,15 @@
             margin-bottom: 10px;
         }
 
-        .song-item .song-title {
+        .playlist-item .playlist-title {
             color: #fff;
         }
 
-        .song-item .song-duration {
+        .playlist-item .playlist-duration {
             color: #ddd;
         }
 
-        .song-item .song-year {
+        .playlist-item .playlist-year {
             color: #888;
             margin-left: 10px;
         }
@@ -46,24 +46,23 @@
             <div class="content">
 
                 <div class="section-block">
-                    <h3 class="text-center text-white mb-4">Песни</h3>
+                    <h3 class="text-center text-white mb-4">Плейлисты</h3>
                     <ul class="list-group">
 
-                        <li class="song-item add-card">
-                            <a th:href="@{/songs/add}" class="d-block text-center" style="text-decoration: none; width: 100%; color: #bbb"> + </a>
+                        <li class="playlist-item add-card">
+                            <a th:href="@{/playlists/add}" class="d-block text-center" style="text-decoration: none; width: 100%; color: #bbb"> + </a>
                         </li>
 
-                        <li th:each="song : ${songs}" class="song-item">
-                            <a th:href="@{/songs/edit(id=${song.id})}" class="d-block" style="text-decoration: none; width: 100%">
+                        <li th:each="playlist : ${playlists}" class="playlist-item">
+                            <a th:href="@{/playlists/edit(id=${playlist.id})}" class="d-block" style="text-decoration: none; width: 100%">
                                 <div class="row d-flex justify-content-between">
                                     <div class="col">
-                                        <span class="song-title fw-bold pe-4" th:text="${song.artist.name}">Исполнитель</span>
-                                        <span class="song-title" th:text="${song.title}">Название песни</span>
-                                        <span class="song-year" th:text="${'(' + song.album.title + ', ' + song.releaseYear + ')'}">Год релиза</span>
+                                        <span class="playlist-title fw-bold pe-4" th:text="${playlist.name}">Название</span>
+                                        <span class="playlist-title" th:text="${playlist.description}">Описание</span>
                                     </div>
                                     <div class="col-auto">
-                                        <span class="song-duration"
-                                            th:text="${#numbers.formatInteger(song.duration / 60, 2)} + ':' + ${#numbers.formatInteger(song.duration % 60, 2)}">
+                                        <span class="playlist-duration"
+                                            th:text="${#numbers.formatInteger(playlist.totalDuration / 60, 2)} + ':' + ${#numbers.formatInteger(playlist.totalDuration % 60, 2)}">
                                             Длительность
                                         </span>
                                     </div>
